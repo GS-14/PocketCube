@@ -9,7 +9,7 @@ cube = range(0,24)
 
 #cube = ['r','r','r','r','w','w','w','w','b','b','b','b','y','y','y','y','g','g','g','g','o','o','o','o']
 
-sollength = 2
+sollength = 10
 
 R = (0, 13, 2, 15, 4, 1, 6, 3, 10, 8, 11, 9, 12, 22, 14, 20, 16, 17, 18, 19, 7, 21, 5, 23)
 Ri = (0, 5, 2, 7, 4, 22, 6, 20, 9, 11, 8, 10, 12, 1, 14, 3, 16, 17, 18, 19, 15, 21, 13, 23)
@@ -81,9 +81,19 @@ for fm in Move.keys():
 while not (q.empty()):
     NextStates(q.get())
 
+ColorMap = {'0':'r', '1':'r','2':'r','3':'r', '4':'w', '5':'w', '6':'w', '7':'w', '8':'b', '9':'b', '10':'b', '11':'b', '12':'y', '13':'y', '14':'y', '15':'y', '16':'g', '17':'g', '18':'g', '19':'g', '20':'o',  '21':'o', '22':'o', '23':'o'}
+
+def Translate(numbers):
+    s = numbers.split(",")
+    ns = ""
+    for i in range(0,24):
+        ns += ColorMap[s[i]]
+    return ns
+
+
 f = open('Pocket Cube - God\'s Lookup Table','w')
 for key,value in Solutions.items():
-    f.write('%s\t:\t%s\n' % (key,value))
+    f.write('%s : %s\n' % (Translate(key),value))
 f.close()
 
 stop = timeit.default_timer()
